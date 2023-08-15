@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'users',
     'rest_framework',
     'corsheaders',
+    'customers',
+    'repositories',
 
 ]
 
@@ -81,7 +83,7 @@ WSGI_APPLICATION = 'auth.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'yt_django_auth',
+        'NAME': 'noside',
         'USER': 'root',
         'PASSWORD': '',
     }
