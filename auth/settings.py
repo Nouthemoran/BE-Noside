@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'customers',
     'repositories',
+    'journals',
+    'conferences',
 
 ]
 
