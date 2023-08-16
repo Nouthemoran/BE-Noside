@@ -38,3 +38,9 @@ def DeleteProduct(request, pk):
     Conferences = Conference.objects.get(confId=pk)
     Conferences.delete()
     return Response("Conference Berhasil Di Hapus!")
+
+@api_view(['GET'])
+def CountProduct(request):
+    Conference_count = Conference.objects.count()
+    data = {'Conference_count': Conference_count}
+    return Response(data)

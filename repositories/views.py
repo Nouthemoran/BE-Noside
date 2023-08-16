@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view 
 from .serializer import RepositorySerializer 
 from .models import Repository
+from rest_framework.views import APIView
 
 @api_view(['GET'])
 def ShowAll(request):
@@ -38,3 +39,9 @@ def DeleteProduct(request, pk):
     Repositories = Repository.objects.get(repoId=pk)
     Repositories.delete()
     return Response("Repository Berhasil Di Hapus!")
+
+@api_view(['GET'])
+def CountProduct(request):
+    Repository_count = Repository.objects.count()
+    data = {'Repository_count': Repository_count}
+    return Response(data)

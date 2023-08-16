@@ -7,4 +7,6 @@ urlpatterns = [
     path('create/', views.CreateProduct, name='journal-create'),
     path('update/<int:pk>/', views.UpdateProduct, name='journal-update'),
     path('delete/<int:pk>/', views.DeleteProduct, name='journal-delete'),
+    path('count/', views.CountProduct, name='journal-count'),
+
 ]

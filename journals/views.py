@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view 
 from .serializer import JournalSerializer 
 from .models import Journal
+from rest_framework.views import APIView
 
 @api_view(['GET'])
 def ShowAll(request):
@@ -38,3 +39,9 @@ def DeleteProduct(request, pk):
     Journals = Journal.objects.get(jurnalId=pk)
     Journals.delete()
     return Response("Journal Berhasil Di Hapus!")
+
+@api_view(['GET'])
+def CountProduct(request):
+    Journal_count = Journal.objects.count()
+    data = {'Journal_count': Journal_count}
+    return Response(data)

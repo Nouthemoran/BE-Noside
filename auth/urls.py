@@ -24,4 +24,5 @@ urlpatterns = [
     path('api/repositories/', include('repositories.urls')),
     path('api/journals/', include('journals.urls')),
     path('api/conferences/', include('conferences.urls')),
+
 ]

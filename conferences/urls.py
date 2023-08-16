@@ -7,4 +7,6 @@ urlpatterns = [
     path('create/', views.CreateProduct, name='conferences-create'),
     path('update/<int:pk>/', views.UpdateProduct, name='conferences-update'),
     path('delete/<int:pk>/', views.DeleteProduct, name='conferences-delete'),
+    path('delete/<int:pk>/', views.DeleteProduct, name='conferences-delete'),
+    path('count/', views.CountProduct, name='conferences-count'),
 ]

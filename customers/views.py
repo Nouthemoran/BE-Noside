@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view 
 from .serializer import CustomerSerializer 
 from .models import Customer
+from rest_framework.views import APIView
 
 @api_view(['GET'])
 def ShowAll(request):
@@ -38,3 +39,9 @@ def DeleteProduct(request, pk):
     Customers = Customer.objects.get(custId=pk)
     Customers.delete()
     return Response("Customer Berhasil Di Hapus!")
+
+@api_view(['GET'])
+def CountProduct(request):
+    Customer_count = Customer.objects.count()
+    data = {'Customer_count': Customer_count}
+    return Response(data)
