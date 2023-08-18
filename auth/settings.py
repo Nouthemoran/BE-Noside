@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'journals',
     'conferences',
 
+
 ]
 
 MIDDLEWARE = [

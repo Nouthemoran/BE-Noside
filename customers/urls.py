@@ -8,5 +8,7 @@ urlpatterns = [
     path('update/<int:pk>/', views.UpdateProduct, name='customer-update'),
     path('delete/<int:pk>/', views.DeleteProduct, name='customer-delete'),
     path('count/', views.CountProduct, name='customer-count'),
+    path('search/', views.search_view, name='customer-search'),
+    path('download_excel/', views.download_excel, name='download_customers_excel'),
 
 ]

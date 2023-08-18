@@ -2,7 +2,9 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view 
 from .serializer import RepositorySerializer 
 from .models import Repository
-from rest_framework.views import APIView
+from rest_framework import status
+from django.http import HttpResponse
+import openpyxl
 
 @api_view(['GET'])
 def ShowAll(request):
@@ -45,3 +47,40 @@ def CountProduct(request):
     Repository_count = Repository.objects.count()
     data = {'Repository_count': Repository_count}
     return Response(data)
+
+@api_view(['GET'])
+def search_view(request):
+    repoName = request.query_params.get('repoName', '')
+    repoId = request.query_params.get('repoId', '')
+    address = request.query_params.get('address', '')
+    
+    # Lakukan pencarian berdasarkan nama konferensi
+    if repoName:
+        Repositories = Repository.objects.filter(repoName__icontains=repoName)
+    elif repoId:
+        Repositories = Repository.objects.filter(repoId__icontains=repoId)
+    elif address:
+        Repositories = Repository.objects.filter(address__icontains=address)
+    else:
+        return Response({'message': 'repository not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = RepositorySerializer(Repositories, many=True)
+    return Response(serializer.data)
+
+def download_excel(request):
+    repositories = Repository.objects.all()
+
+    workbook = openpyxl.Workbook()
+    worksheet = workbook.active
+    worksheet.append(['Repository Id', 'Repository Name', 'Address', 'Detail Repository', 'Repository Images'])
+
+    for repository in repositories:
+        worksheet.append([repository.repoId, repository.repoName, repository.address, repository.detailRepo, repository.repoImages])
+
+    file_name = 'repositories.xlsx'
+
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = f'attachment; filename="{file_name}"'
+    workbook.save(response)
+
+    return response
