@@ -3,8 +3,6 @@ from .serializers import UserSerializer
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from .models import User
-from rest_framework import generics
-
 import logging
 from django.contrib.auth.hashers import make_password
 import jwt, datetime
@@ -89,11 +87,3 @@ class LogoutView(APIView):
 class UserUpdateView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-    def perform_update(self, serializer):
-        if 'password' in self.request.data:
-            password = make_password(self.request.data['password'])
-            serializer.save(password=password)
-        else:
-            serializer.save()
-

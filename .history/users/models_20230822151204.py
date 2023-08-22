@@ -21,3 +21,6 @@ class User(AbstractUser):
 
 
 
+class UserUpdateView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
