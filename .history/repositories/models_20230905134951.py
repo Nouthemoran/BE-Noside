@@ -19,9 +19,7 @@ class Repository (models.Model):
     detailRepo = models.CharField(max_length=255)
     repoImages = models.ImageField(upload_to='repository_images/', null=True, blank=True)
     background = models.ImageField(upload_to='backgrounds/', null=True, blank=True)
-    urlsRepo = models.URLField(max_length=200, null=True, blank=True, error_messages={
-        'invalid': 'Masukkan URL yang valid.'
-    })  
+    urlsRepo = models.URLField(max_length=200, null=True, blank=True)  # Tambahkan bidang ini
     
     def __str__(self):
         return self.repoName
