@@ -10,6 +10,6 @@ urlpatterns = [
     path('count/', views.CountProduct, name='repository-count'),
     path('search/', views.search_view, name='repository-search'),
     path('download_excel/', views.download_excel, name='download_repositories_excel'),
-    path('list/sort_repo/', views.sort_repo, name='sort_repo'),
+    path('list/sort_', views.sort_repo, name='sort_repo'),
 
 ]

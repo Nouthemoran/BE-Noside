@@ -89,7 +89,7 @@ def download_excel(request):
     return response
 
 @api_view(['GET'])
-def sort_repo(request):
+def (request):
     if request.method == 'GET':
         # Ambil nilai 'ordering' dari parameter query
         ordering = request.query_params.get('ordering', None)

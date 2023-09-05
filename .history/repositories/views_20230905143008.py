@@ -10,6 +10,13 @@ from rest_framework.decorators import parser_classes
 
 @api_view(['GET'])
 def ShowAll(request):
+    if request.method == 'GET':
+        # Ambil nilai 'ordering' dari parameter query
+        ordering = request.query_params.get('ordering', None)
+
+        # Tentukan pengurutan default jika 'ordering' tidak ada atau tidak valid
+        if ordering not in ['createdAt', '-createdAt']:
+            ordering = '-createdAt'  # Pengurutan berdasarkan terbaru (default)
     Repositories = Repository.objects.all()
     serializer = RepositorySerializer(Repositories, many=True)
     return Response(serializer.data)
@@ -87,18 +94,3 @@ def download_excel(request):
     workbook.save(response)
 
     return response
-
-@api_view(['GET'])
-def sort_repo(request):
-    if request.method == 'GET':
-        # Ambil nilai 'ordering' dari parameter query
-        ordering = request.query_params.get('ordering', None)
-
-        # Tentukan pengurutan default jika 'ordering' tidak ada atau tidak valid
-        if ordering not in ['createdAt', '-createdAt']:
-            ordering = '-createdAt'  # Pengurutan berdasarkan terbaru (default)
-
-        # Terapkan pengurutan pada queryset
-        repositories = Repository.objects.all().order_by(ordering)
-        serializer = RepositorySerializer(repositories, many=True)
-        return Response(serializer.data)

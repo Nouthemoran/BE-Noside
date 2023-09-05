@@ -1,7 +1,6 @@
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
 import os
-from django.utils import timezone
 from django.db import models
 
 # Create your models here.
